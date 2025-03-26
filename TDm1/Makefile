@@ -1,20 +1,22 @@
 # Définition des variables
 CXX = gcc
-CXXFLAGS = -Wall -Wextra 
-SRC_DIR = tests
+CXXFLAGS = -Wall -Wextra -ansi -pedantic
+TEST_DIR = tests
 BIN_DIR = bin
+LIB_DIR = lib
+LIBS = $(LIB) 
 
-# Recherche des fichiers sources et génération des noms de binaires
-SOURCES = $(wildcard $(SRC_DIR)/*.c)
-BINARIES = $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SOURCES))
+SOURCES_TESTS = $(wildcard $(TEST_DIR)/*.c)
+LIB = $(wildcard $(LIB_DIR)/*.c)
+BINARIES = $(patsubst $(TEST_DIR)/%.c, $(BIN_DIR)/%, $(SOURCES_TESTS))
 
-# Règle par défaut
-all: $(BINARIES)
+all: $(BINARIES) 
 
-# Compilation de chaque fichier source en un exécutable
-$(BIN_DIR)/%: $(SRC_DIR)/%.c
+$(LIB_DIR)/%: $(LIB_DIR)/%.c
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+$(BIN_DIR)/%: $(TEST_DIR)/%.c $(LIB)
 	$(CXX) $(CXXFLAGS) $< -o $@ $(LIBS)
 
-# Nettoyage
-clean:
-	rm $(BIN_DIR)/*
+clean: $(BINARIES) 
+	rm $(BINARIES) 
