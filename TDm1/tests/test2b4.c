@@ -16,10 +16,12 @@ int main(int argc, char* argv[]) {
     }
 
     char* buffer;
+    int nblignes = 0;
     while((buffer = litLigne(fd)) != NULL) {
-        printf("%s\n", buffer);
+        nblignes++;
         free(buffer);
     }
+    printf("Le fichier possède %d lignes\n", nblignes);
     close(fd);
     return 0;
 }

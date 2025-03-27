@@ -1,6 +1,6 @@
 # Définition des variables
 CXX = gcc
-CXXFLAGS = -Wall -Wextra -ansi -pedantic
+CXXFLAGS = -Wall -Wextra -ansi -pedantic -std=c11
 TEST_DIR = tests
 BIN_DIR = bin
 LIB_DIR = lib

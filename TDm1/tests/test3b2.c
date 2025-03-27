@@ -8,18 +8,15 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "Usage: %s <fichier>\n", argv[0]);
         return 1;
     }
-    
-    int fd = open(argv[1], O_RDONLY);
+
+    int fd = open(argv[1], O_WRONLY | O_CREAT, 0644);
     if(fd == -1) {
-        perror("ERROR : error while opening the file\n");
+        perror("ERROR : error while opening the destination file\n");
         return 1;
     }
 
-    char* buffer;
-    while((buffer = litLigne(fd)) != NULL) {
-        printf("%s\n", buffer);
-        free(buffer);
-    }
+      
+    ecritString(1, "ce texte ne sera pas écrit dans le fichier mais sur la sortie standard");
     close(fd);
     return 0;
 }

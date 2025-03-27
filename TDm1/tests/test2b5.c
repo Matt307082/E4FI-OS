@@ -15,11 +15,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char* buffer;
-    while((buffer = litLigne(fd)) != NULL) {
-        printf("%s\n", buffer);
-        free(buffer);
-    }
+    litLigne(0);
+    printf("Ce texte ne sera pas lu");
     close(fd);
     return 0;
 }

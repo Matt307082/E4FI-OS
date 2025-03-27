@@ -11,15 +11,32 @@ char* litDixCaracteres(int fd) {
 }
 
 char* litLigne(int fd) {
-    char* buffer = malloc(TAILLEBUF);
-    char* retour = malloc(TAILLEBUF);
-    read(fd, buffer, TAILLEBUF);
-    for(int i=0; i<TAILLEBUF; i++) {
-        if(buffer[i] == '\n') {
-            retour[i] = '\0';
-            return retour;
+    char* buffer = malloc(TAILLEBUF*sizeof(char));
+
+    int i = 0;
+    char c;
+
+    while (i < TAILLEBUF - 1) {
+        int ret = read(fd, &c, 1); 
+        if(ret == 0){
+            break;
         }
-        retour[i] = buffer[i];
+        if (c == '\n'){
+            buffer[i] = '\0';
+            return buffer;
+        }
+        buffer[i++] = c;
     }
-    return retour;
+
+    if (i == 0) {
+        free(buffer);
+        return NULL;
+    }
+
+    buffer[i] = '\0';
+    return buffer;
+}
+
+int ecritString(int fd, char* string) {
+    return write(fd, string, strlen(string));
 }

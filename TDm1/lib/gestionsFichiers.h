@@ -5,5 +5,6 @@
 
 char* litDixCaracteres(int fd);
 char* litLigne(int fd);
+int ecritString(int fd, char* string);
 
 #endif // GESTIONFICHIER_H
