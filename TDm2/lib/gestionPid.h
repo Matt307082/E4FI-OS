@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 char* getCharAndPid(char* string);
 char* getCharAndPpid(char* string);
